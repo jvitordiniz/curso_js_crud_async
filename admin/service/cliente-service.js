@@ -19,7 +19,6 @@
 const listaClientes = () => {
     return fetch(`http://localhost:3000/profile`)//fetch tem o "get" automático
     .then(resposta=>{
-        console.log(resposta)
         return resposta.json()
     }) 
 }
@@ -40,7 +39,14 @@ const cadastraCliente = (nome, email) =>{
     })
 }
 
+const deletaCliente = (id) => {
+    return fetch(`http://localhost:3000/profile/${id}`,{ //id passado no endereço da request
+        method: 'DELETE'
+    })
+}
+
 export const clienteService = {
     listaClientes,
-    cadastraCliente
+    cadastraCliente,
+    deletaCliente
 }
