@@ -17,11 +17,10 @@ const criaNovaLinha = (nome, email) => {
 
 const tabela = document.querySelector ('[data-tabela]') //querySelector percorre o DOM a procura do elemento data-tabela
 
-//*****Abaixo é aberta a comunicação ajax (aplicação x API) assíncrona para alimentar a tbody*****
-//uso da promise ausenta a necessidae de vários XMLRequests 
 
-const listaClientes = () =>{
-    const promise = new Promise((resolve, reject)=>{
+//*****Abaixo é aberta a comunicação ajax (aplicação x API) assíncrona para alimentar a tbody*****
+//***** A fetch substituiu a promise e o http (bloco abaixo)
+    /* const promise = new Promise((resolve, reject)=>{
         const http = new XMLHttpRequest()  
         http.open('GET', 'http://localhost:3000/profile') // (1º modo de request , 2º endereço a enviar a requisição)
         http.onload = () => { 
@@ -33,14 +32,19 @@ const listaClientes = () =>{
         }
         http.send()
     })
-    //console.log(promise)
-    return promise
+    return promise*/
+
+//comando para subir o json-server: json-server --watch db.json    
+const listaClientes = () =>{
+    return fetch(`http://localhost:3000/profile`)
+    .then(resposta=>{
+        return resposta.json()
+    }) 
 }
 
 listaClientes()
 .then(data =>{ //se a promise for resolvida com sucesso, então
     data.forEach(elemento => {
     tabela.appendChild(criaNovaLinha(elemento.nome,elemento.email)) //adiciona filho (tabela) ao tbody 
-})
-})
+})})
 
