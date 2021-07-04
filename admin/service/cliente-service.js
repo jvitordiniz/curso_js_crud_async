@@ -1,25 +1,5 @@
-const criaNovaLinha = (nome, email) => {
-
-    const linhaNovoCliente = document.createElement('tr') /*criar nova linha com cliente */
-    const conteudo = `
-                    <td class="td" data-td>${nome}</td>
-                    <td>${email}</td>
-                    <td>
-                        <ul class="tabela__botoes-controle">
-                            <li><a href="../telas/edita_cliente.html?id=" class="botao-simples botao-simples--editar">Editar</a></li>
-                            <li><button class="botao-simples botao-simples--excluir" type="button">Excluir</button></li>
-                        </ul>
-                    </td>`
-
-    linhaNovoCliente.innerHTML = conteudo //coloca o "conteudo" <td> dentro da nova linha 
-    return linhaNovoCliente
-}
-
-const tabela = document.querySelector ('[data-tabela]') //querySelector percorre o DOM a procura do elemento data-tabela
-
-
 //*****Abaixo é aberta a comunicação ajax (aplicação x API) assíncrona para alimentar a tbody*****
-//***** A fetch substituiu a promise e o http (bloco abaixo)
+//***** A fetch já faz o GET e substituiu a promise e o http (bloco abaixo)
     /* const promise = new Promise((resolve, reject)=>{
         const http = new XMLHttpRequest()  
         http.open('GET', 'http://localhost:3000/profile') // (1º modo de request , 2º endereço a enviar a requisição)
@@ -33,18 +13,17 @@ const tabela = document.querySelector ('[data-tabela]') //querySelector percorre
         http.send()
     })
     return promise*/
+//comando para subir o json-server: json-server --watch db.json   
+//caso ocorra erro de CORS execute o comando: browser-sync start --server --file . --host --port 5000 -startPath admin/telas/lista_cliente.html
 
-//comando para subir o json-server: json-server --watch db.json    
-const listaClientes = () =>{
+const listaClientes = () => {
     return fetch(`http://localhost:3000/profile`)
     .then(resposta=>{
+        console.log(resposta)
         return resposta.json()
     }) 
 }
 
-listaClientes()
-.then(data =>{ //se a promise for resolvida com sucesso, então
-    data.forEach(elemento => {
-    tabela.appendChild(criaNovaLinha(elemento.nome,elemento.email)) //adiciona filho (tabela) ao tbody 
-})})
-
+export const clienteService ={
+    listaClientes
+}
