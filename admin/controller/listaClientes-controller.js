@@ -23,19 +23,30 @@ const tabela = document.querySelector ('[data-tabela]') //querySelector percorre
 tabela.addEventListener('click', async (event) => {
     let ehBotaoDeletar = event.target.className === 'botao-simples botao-simples--excluir'
     if(ehBotaoDeletar){
-        const linhaCliente = event.target.closest('[data-id]') //data-id é um datattributes da <tr>
-        let id = linhaCliente.dataset.id
-        await clienteService.deletaCliente(id) //deleta da API
-        linhaCliente.remove() //remove da <table>
-
+        try{
+            const linhaCliente = event.target.closest('[data-id]') //data-id é um datattributes da <tr>
+            let id = linhaCliente.dataset.id
+            await clienteService.deletaCliente(id) //deleta da API
+            linhaCliente.remove() //remove da <table>
+        }
+        catch(erro){
+            console.log(erro)
+            window.location.href = '../telas/erro.html'
+        }
     }
 })
 
 const render = async () =>{
-    const listaClientes = await clienteService.listaClientes()  //se a promise vinda pela fetch for resolvida com sucesso, então
-    listaClientes.forEach(elemento => {
-    tabela.appendChild(criaNovaLinha(elemento.nome,elemento.email, elemento.id)) //adiciona filho (tabela) ao tbody 
-    })
+    try{
+        const listaClientes = await clienteService.listaClientes()  //se a promise vinda pela fetch for resolvida com sucesso, então
+        listaClientes.forEach(elemento => {
+        tabela.appendChild(criaNovaLinha(elemento.nome,elemento.email, elemento.id)) //adiciona filho (tabela) ao tbody 
+        })
+    }
+    catch(erro){
+        console.log(erro)
+        window.location.href = '../telas/erro.html'
+    }
 }
 
 render()
