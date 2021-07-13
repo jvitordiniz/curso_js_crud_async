@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/componentes/botao.css">
     <link rel="stylesheet" href="../assets/css/componentes/modal.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    rel="stylesheet">
 </head>
 <body>
     <header class="cabecalho container">
@@ -21,8 +21,8 @@
         <nav>
             <ul class="cabecalho__lista-navegacao">
                 <li class="cabecalho__link"><a href="#">Dashboard</a></li>
-                <li class="cabecalho__link"><a href="lista_produto.html">Produtos</a></li>
-                <li class="cabecalho__link"><a href="#">Clientes</a></li>
+                <li class="cabecalho__link"><a href="#">Produtos</a></li>
+                <li class="cabecalho__link"><a href="lista_cliente.html">Clientes</a></li>
                 <li class="cabecalho__link"><a href="#">Pets</a></li>
             </ul>
         </nav>
@@ -32,12 +32,14 @@
         <table class="tabela">
             <thead>
                 <tr>
-                    <span class="material-icons md-48">supervised_user_circle</span>
+                    <span class="material-icons md-48">shopping_cart</span>
                 </tr>
                 <tr>
-                    <th class="tabela__coluna--p">Nome</th>
-                    <th class="tabela__coluna--g">Email</th>
-                    <th class="tabela__coluna--m tabela__alinhamento--direita"><a href="cadastra_cliente.html" class="botao-simples botao-simples--adicionar">Novo Cliente</a></th>
+                
+                    <th class="tabela__coluna--p">Produto</th>
+                    <th class="tabela__coluna--g">Preço</th>
+                    <th class="tabela__coluna--g">Descrição</th>
+                    <th class="tabela__coluna--m tabela__alinhamento--direita"><a href="cadastro_produto.html" class="botao-simples botao-simples--adicionar">Novo Produto</a></th>
                 </tr>
             </thead>
             <tbody data-tabela>
@@ -60,7 +62,7 @@
     </main>
 </body> 
 
-<script type="module" src="../controller/listaClientes-controller.js"></script>
+<script type="module" src="../controller/listaProdutos-controller.js"></script>
 
 </html>
 

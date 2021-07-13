@@ -42,7 +42,9 @@ const render = async () => {
 
         const listaClientes = await clienteService.listaClientes()//se a promise vinda por meio do await for resolvida com sucesso, então
         listaClientes.forEach(elemento => {
+            if(elemento.tipo === 1){
             tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email, elemento.id)) //adiciona filho (tabela) ao tbody 
+            }
         })
     } 
     catch (erro) {
